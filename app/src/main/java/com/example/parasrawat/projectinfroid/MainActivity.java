@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -33,9 +35,11 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 1 ;
     public GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth mAuth;
+
     public static final String TAG="MAIN ACTIVITY KE INSIDE";
     public CallbackManager mCallbackManager;
     LoginButton loginButton;
+    ImageView singin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +117,7 @@ loginButton.setOnClickListener(new View.OnClickListener() {
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Toast.makeText(MainActivity.this,"Gooogle Sign in has Failed",Toast.LENGTH_LONG).show();
+                Log.d(TAG, "===================: "+e);
                 // ...
             }
         }
