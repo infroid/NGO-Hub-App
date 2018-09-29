@@ -2,5 +2,17 @@
     <string name="app_name">ProjectInfroid</string>
     <string name="facebook_app_id">1030221730492469</string>
     <string name="fb_login_protocol_scheme">fb1030221730492469</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string-array name="issue">
+        <item>Issue</item>
+        <item>Poverty</item>
+        <item>Health</item>
+        <item>Pollution</item>
+        <item>Hygiene</item>
+        <item>Women</item>
+        <item>other</item>
+    </string-array>
 
 </resources>

@@ -162,7 +162,7 @@ loginButton.setOnClickListener(new View.OnClickListener() {
     }
 
     private void updateUI() {
-        Toast.makeText(MainActivity.this,"Congratulations you are logged in ",Toast.LENGTH_LONG).show();
+//        Toast.makeText(MainActivity.this,"Congratulations you are logged in ",Toast.LENGTH_LONG).show();
 
     }
 

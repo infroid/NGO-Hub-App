@@ -23,9 +23,9 @@ public class ViewPagerAdapter extends PagerAdapter {
     public String[] headings={"Login","Report","Feed"};
     public int[] addimages={R.drawable.facebook};
     public String[] desc={"Login using facebook or google","File the report with a short description","Keep track of your activities through feed"};
-    public int[] backgroung={Color.rgb(0,0,0),
-    Color.rgb(0,0,0),
-    Color.rgb(0,0,0)};
+    public int[] backgroung={Color.rgb(0,0,128),
+    Color.rgb(0,128,0),
+    Color.rgb(220,60,60)};
 
     public ViewPagerAdapter(Context context) {
         this.context = context;

@@ -33,11 +33,15 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".ContentUploader" />
+        <activity android:name=".ContentUploader">
+
+        </activity>
         <activity android:name=".IntroSlider">
+
 
         </activity>
         <activity android:name=".Slides">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
