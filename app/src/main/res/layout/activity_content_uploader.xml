@@ -22,6 +22,7 @@
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:popupTheme="@style/Theme.AppCompat.Light">
+        </android.support.v7.widget.Toolbar>
 
             <FrameLayout
                 android:id="@+id/fragmentContainer"
@@ -29,13 +30,7 @@
                 android:layout_height="match_parent">
 
             </FrameLayout>
-
-
-        </android.support.v7.widget.Toolbar>
-
     </LinearLayout>
-
-
     <android.support.design.widget.NavigationView
         android:id="@+id/navigationbar"
         android:layout_width="wrap_content"
@@ -45,6 +40,8 @@
         app:menu="@menu/drawablemenu">
 
     </android.support.design.widget.NavigationView>
+
+
 
 
 </android.support.v4.widget.DrawerLayout>
