@@ -14,6 +14,7 @@ import android.widget.TextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_intro_slider);
         imageView1=findViewById(R.id.splashimage);
         imageView2=findViewById(R.id.heading);

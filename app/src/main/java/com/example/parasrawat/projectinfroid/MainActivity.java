@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -16,6 +17,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -40,11 +42,25 @@ public class MainActivity extends AppCompatActivity {
     public CallbackManager mCallbackManager;
     LoginButton loginButton;
     ImageView singin;
+    ProgressBar progress;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        progress=findViewById(R.id.progress);
+        progress.setVisibility(View.INVISIBLE);
+
+        if (user != null) {
+            // User is signed in
+            Intent i = new Intent(MainActivity.this, ContentUploader.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+        } else {
+            // User is signed out
+            Log.d(TAG, "onAuthStateChanged:signed_out");
+        }
         mAuth=FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -55,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progress.setVisibility(View.VISIBLE);
                 signIn();
             }
         });
@@ -67,11 +84,13 @@ public class MainActivity extends AppCompatActivity {
 loginButton.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
+
         loginButton.setReadPermissions("email", "public_profile","user_friends");
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
+
                 startActivity(new Intent(MainActivity.this,ContentUploader.class));
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
@@ -154,12 +173,19 @@ loginButton.setOnClickListener(new View.OnClickListener() {
     @Override
     protected void onStart() {
         super.onStart();
+
         FirebaseUser firebaseUser=mAuth.getCurrentUser();
         if(firebaseUser!=null){
+
             updateUI();
 
+                startActivity(new Intent(MainActivity.this,ContentUploader.class));
+            
+
         }
+
     }
+
 
     private void updateUI() {
 //        Toast.makeText(MainActivity.this,"Congratulations you are logged in ",Toast.LENGTH_LONG).show();
