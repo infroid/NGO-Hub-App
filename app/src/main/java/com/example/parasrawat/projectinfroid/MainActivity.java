@@ -180,7 +180,7 @@ loginButton.setOnClickListener(new View.OnClickListener() {
             updateUI();
 
                 startActivity(new Intent(MainActivity.this,ContentUploader.class));
-            
+
 
         }
 

@@ -4,6 +4,9 @@
     <string name="fb_login_protocol_scheme">fb1030221730492469</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    
 
     <string-array name="issue">
         <item>Issue</item>
