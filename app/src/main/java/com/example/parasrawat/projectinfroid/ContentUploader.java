@@ -1,16 +1,20 @@
 package com.example.parasrawat.projectinfroid;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.parasrawat.projectinfroid.FragmentClasses.myactivity;
 import com.example.parasrawat.projectinfroid.FragmentClasses.reportclass;
@@ -48,9 +52,10 @@ public class ContentUploader extends AppCompatActivity implements NavigationView
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
 
+            super.onBackPressed();
         }
+
     }
 
     @Override
@@ -64,8 +69,14 @@ public class ContentUploader extends AppCompatActivity implements NavigationView
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new myactivity()).commit();
 
                 break;
+            case R.id.logout:
+                Toast.makeText(this,"User Signed Out",Toast.LENGTH_LONG).show();
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(ContentUploader.this,MainActivity.class));
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

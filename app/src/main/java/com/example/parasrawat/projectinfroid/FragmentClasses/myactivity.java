@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.example.parasrawat.projectinfroid.Adapters.HorizontalAdaptor;
 import com.example.parasrawat.projectinfroid.R;
@@ -25,10 +27,21 @@ public class myactivity extends Fragment {
     ArrayList<Integer> photoarray=new ArrayList<>();
     ArrayList<String> issue=new ArrayList<>();
     ArrayList<String> description=new ArrayList<>();
+    RatingBar ratingBar;
+    TextView ratingmeter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.activity_my,container,false);
+        ratingBar=view.findViewById(R.id.ratingBar);
+        ratingmeter=view.findViewById(R.id.ratingcount);
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                ratingmeter.setText(""+v);
+            }
+        });
         photoarray.add(R.drawable.poverty);
         issue.add("Poverty");
         description.add("Poverty Description");

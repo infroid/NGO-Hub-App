@@ -1,9 +1,11 @@
 package com.example.parasrawat.projectinfroid.FragmentClasses;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,4 +35,28 @@ public class reportclass extends Fragment {
 
         return view;
     }
+
+    @Override
+    public boolean getAllowEnterTransitionOverlap() {
+        return super.getAllowEnterTransitionOverlap();
+    }
+
+    void  AlertDialog(){
+        final AlertDialog.Builder alert=new AlertDialog.Builder(getContext());
+        alert.setMessage("Are you sure your want to exit?").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                getActivity().finish();
+                ;
+            }
+        })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+    }
+
 }
