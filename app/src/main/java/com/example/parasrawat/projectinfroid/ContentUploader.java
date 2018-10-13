@@ -53,9 +53,7 @@ public class ContentUploader extends AppCompatActivity implements NavigationView
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
 
-            Toast.makeText(this,"User Signed Out",Toast.LENGTH_LONG).show();
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(ContentUploader.this,MainActivity.class));
+           finish();
         }
 
     }

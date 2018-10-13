@@ -27,21 +27,14 @@ public class myactivity extends Fragment {
     ArrayList<Integer> photoarray=new ArrayList<>();
     ArrayList<String> issue=new ArrayList<>();
     ArrayList<String> description=new ArrayList<>();
-    RatingBar ratingBar;
+
     TextView ratingmeter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.activity_my,container,false);
-        ratingBar=view.findViewById(R.id.ratingBar);
-        ratingmeter=view.findViewById(R.id.ratingcount);
 
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                ratingmeter.setText(""+v);
-            }
-        });
+        ratingmeter=view.findViewById(R.id.ratingcount);
         photoarray.add(R.drawable.poverty);
         issue.add("Poverty");
         description.add("Poverty Description");
@@ -56,7 +49,7 @@ public class myactivity extends Fragment {
         description.add("Feminism description");
         recyclerView=view.findViewById(R.id.horizontalrecyclerview);
         recyclerView.setHasFixedSize(true);
-        layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
+        layoutManager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         adapter=new HorizontalAdaptor(photoarray,issue,description,getContext());
         recyclerView.setAdapter(adapter);
