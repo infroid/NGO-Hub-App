@@ -53,7 +53,7 @@ public class ContentUploader extends AppCompatActivity implements NavigationView
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
 
-           finish();
+           startActivity(new Intent(ContentUploader.this,IntroSlider.class));
         }
 
     }

@@ -48,7 +48,7 @@ public class HorizontalAdaptor extends RecyclerView.Adapter<HorizontalAdaptor.Vi
     @Override
     public void onBindViewHolder(@NonNull final HorizontalAdaptor.ViewHolder viewHolder, final int i) {
     viewHolder.imageView.setImageResource(photoarray.get(i));
-    viewHolder.issue.setText(description.get(i));
+    viewHolder.issue.setText(issue.get(i));
     viewHolder.description.setText(description.get(i));
     viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
         @Override
