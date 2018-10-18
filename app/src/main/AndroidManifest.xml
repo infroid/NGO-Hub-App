@@ -49,6 +49,7 @@
         <activity android:name=".Slides">
 
         </activity>
+        <activity android:name=".RecyclerViewClick" />
     </application>
 
 </manifest>
