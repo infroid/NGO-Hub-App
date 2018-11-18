@@ -34,22 +34,23 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int RC_SIGN_IN = 1 ;
+    private static final int RC_SIGN_IN = 1;
     public GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth mAuth;
 
-    public static final String TAG="MAIN ACTIVITY KE INSIDE";
+    public static final String TAG = "MAIN ACTIVITY KE INSIDE";
     public CallbackManager mCallbackManager;
     LoginButton loginButton;
     ImageView singin;
     ProgressBar progress;
     FirebaseUser user;
+    int demo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        progress=findViewById(R.id.progress);
+        progress = findViewById(R.id.progress);
         progress.setVisibility(View.INVISIBLE);
 
         if (user != null) {
@@ -61,12 +62,12 @@ public class MainActivity extends AppCompatActivity {
             // User is signed out
             Log.d(TAG, "onAuthStateChanged:signed_out");
         }
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        mGoogleSignInClient= GoogleSignIn.getClient(this,gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,53 +79,50 @@ public class MainActivity extends AppCompatActivity {
 
 
         mCallbackManager = CallbackManager.Factory.create();
-         loginButton = findViewById(R.id.login_button);
+        loginButton = findViewById(R.id.login_button);
 
 // ...
-loginButton.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-
-        loginButton.setReadPermissions("email", "public_profile","user_friends");
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "facebook:onSuccess:" + loginResult);
+            public void onClick(View view) {
 
-                startActivity(new Intent(MainActivity.this,ContentUploader.class));
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
+                loginButton.setReadPermissions("email", "public_profile", "user_friends");
+                loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        Log.d(TAG, "facebook:onSuccess:" + loginResult);
 
-            @Override
-            public void onCancel() {
-                Log.d(TAG, "facebook:onCancel");
-                // ...
-            }
+                        startActivity(new Intent(MainActivity.this, ContentUploader.class));
+                        handleFacebookAccessToken(loginResult.getAccessToken());
+                    }
 
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, "facebook:onError", error);
-                // ...
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "facebook:onCancel");
+                        // ...
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        Log.d(TAG, "facebook:onError", error);
+                        // ...
+                    }
+                });
+
+
             }
         });
 
 
     }
-});
-
-        
-    }
-
-
-
 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-       mCallbackManager.onActivityResult(requestCode,resultCode,data);
-        Log.d(TAG, "onActivityResult: "+requestCode+resultCode+data);
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: " + requestCode + resultCode + data);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
@@ -135,13 +133,12 @@ loginButton.setOnClickListener(new View.OnClickListener() {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Toast.makeText(MainActivity.this,"Gooogle Sign in has Failed",Toast.LENGTH_LONG).show();
-                Log.d(TAG, "===================: "+e);
+                Toast.makeText(MainActivity.this, "Gooogle Sign in has Failed", Toast.LENGTH_LONG).show();
+                Log.d(TAG, "===================: " + e);
                 // ...
             }
         }
     }
-
 
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
@@ -156,13 +153,13 @@ loginButton.setOnClickListener(new View.OnClickListener() {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success google");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            startActivity(new Intent(MainActivity.this,ContentUploader.class));
-                            Toast.makeText(MainActivity.this,"User successfully logged in ",Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(MainActivity.this, ContentUploader.class));
+                            Toast.makeText(MainActivity.this, "User successfully logged in ", Toast.LENGTH_LONG).show();
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(MainActivity.this,"Sign in has failed Try again",Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, "Sign in has failed Try again", Toast.LENGTH_LONG).show();
 
                         }
 
@@ -174,12 +171,12 @@ loginButton.setOnClickListener(new View.OnClickListener() {
     protected void onStart() {
         super.onStart();
 
-        FirebaseUser firebaseUser=mAuth.getCurrentUser();
-        if(firebaseUser!=null){
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        if (firebaseUser != null) {
 
             updateUI();
 
-                startActivity(new Intent(MainActivity.this,ContentUploader.class));
+            startActivity(new Intent(MainActivity.this, ContentUploader.class));
 
 
         }
@@ -196,6 +193,7 @@ loginButton.setOnClickListener(new View.OnClickListener() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
 
@@ -206,10 +204,11 @@ loginButton.setOnClickListener(new View.OnClickListener() {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+
                             Log.d(TAG, "signInWithCredential:success fa");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(MainActivity.this,"Welcome",Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(MainActivity.this,ContentUploader.class));
+                            Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(MainActivity.this, ContentUploader.class));
                             updateUI();
                         } else {
                             // If sign in fails, display a message to the user.
